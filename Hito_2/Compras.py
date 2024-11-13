@@ -1,7 +1,7 @@
 from datetime import date, time, datetime
 dt = datetime.now()
 clientes = {
-    0: {
+    "root": {
         "nombre": "root",
         "direccion": "",
         "email": "",
@@ -40,7 +40,7 @@ def registrar_cliente():
     mostrar_menu()
    
 def ver_clientes():
-    if clientes == {}:
+    if not clientes :
         print("No hay clientes registrados aún")
     else:
         print("{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
@@ -70,7 +70,6 @@ def realizar_compra():
     for producto, datos in productos.items():
         print("{:<10} {:<20} {:<30}".format(producto, datos["nombre"], datos["precio"]))
     while True:
-        id_pedido = numero_pedido + 1
         numero_pedido += 1
         compra = input("Indique el numero del producto que desea comprar(si has terminado escribe 'fin'): ")
         if compra.lower() == 'fin':
@@ -84,9 +83,9 @@ def realizar_compra():
                     "precio": productos[compra]["precio"],
                     "Clienteid": idcliente,
                     "fecha": dt.date(),
-                }
-    mostrar_menu()
-       
+}                
+    print(pedidos)
+    mostrar_menu()      
 def mostrar_menu():
     print("\n--- Menú Principal ---")
     print("1. Registrar Cliente")
@@ -107,6 +106,8 @@ def mostrar_menu():
             realizar_compra()
         case 5:
             seguimiento()
+        case 6:
+            return
         case _:
             print("Error, indique una opcion valida")
             mostrar_menu()
