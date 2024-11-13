@@ -51,20 +51,23 @@ def buscar_cliente():
 
 
 def realizar_compra():
-    idcliente = input("Por favor, introduzca su ID")
+    global numero_pedido
+    idcliente = input("Por favor, introduzca su ID: ")
     if idcliente not in clientes:
         print("El ID de cliente no está registrado. Por favor, registre al cliente primero.")
         mostrar_menu()
     print("\n--------Productos disponibles---------")
     for producto, datos in productos.items():
         print("{:<10} {:<20} {:<30}".format(producto, datos["nombre"], datos["precio"]))
-    while True
+    while True:
         id_pedido = numero_pedido + 1
         numero_pedido =+ 1
-        compra = int(input("Indique el numero del producto que desea comprar(si has terminado escribe 'fin'): "))
+        compra = input("Indique el numero del producto que desea comprar(si has terminado escribe 'fin'): ")
         if compra.lower() == 'fin':
+            print(pedidos)
             break
         else:
+            compra = int(compra)
             pedidos[id_pedido] = {   
                                   
             }
