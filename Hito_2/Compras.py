@@ -1,4 +1,12 @@
-clientes = {}  # Diccionario de clientes: clave es el ID único del cliente
+from datetime import date, time, datetime
+dt = datetime.now()
+clientes = {
+    0: {
+        "nombre": "root",
+        "direccion": "",
+        "email": "",
+        "Admin": True,
+        "contraseña": "CampusFP"}}  
 productos = {
     1: {"nombre": "Patatas", "precio": 8.0},
     2: {"nombre": "Zanahorias", "precio": 6.0},
@@ -16,7 +24,7 @@ def registrar_cliente():
         print("Este ID ya existe. Intente con otro.")
         return
 
-
+    admin = False
     nombre = input("Ingrese el nombre del cliente: ")
     direccion = input("Ingrese la dirección del cliente: ")
     email = input("Ingrese el email del cliente: ")
@@ -25,7 +33,8 @@ def registrar_cliente():
     clientes[id_cliente] = {
         "nombre": nombre,
         "direccion": direccion,
-        "email": email
+        "email": email,
+        "Admin": admin
     }
     print("Cliente registrado con éxito.")
     mostrar_menu()
@@ -51,33 +60,30 @@ def buscar_cliente():
 
 
 def realizar_compra():
-    idcliente = input("Por favor, introduzca su ID")
-    global numero_pedido
     idcliente = input("Por favor, introduzca su ID: ")
+    global numero_pedido
     if idcliente not in clientes:
         print("El ID de cliente no está registrado. Por favor, registre al cliente primero.")
         mostrar_menu()
+        return
     print("\n--------Productos disponibles---------")
     for producto, datos in productos.items():
         print("{:<10} {:<20} {:<30}".format(producto, datos["nombre"], datos["precio"]))
     while True:
         id_pedido = numero_pedido + 1
-        numero_pedido =+ 1
-        compra = int(input("Indique el numero del producto que desea comprar(si has terminado escribe 'fin'): "))
+        numero_pedido += 1
         compra = input("Indique el numero del producto que desea comprar(si has terminado escribe 'fin'): ")
         if compra.lower() == 'fin':
             print(pedidos)
             break
         else:
             compra = int(compra)
-            pedidos[id_pedido] = {   
-                                  
-            }
             if compra in productos:
                 pedidos[numero_pedido] = {
                     "producto": productos[compra]["nombre"],
                     "precio": productos[compra]["precio"],
-                    "Clienteid": idcliente
+                    "Clienteid": idcliente,
+                    "fecha": dt.date(),
                 }
     mostrar_menu()
        
