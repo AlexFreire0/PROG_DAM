@@ -35,7 +35,7 @@ def registrar_cliente():
         "email": email,
         "Admin": admin
     }
-    print("Cliente registrado con éxito.")
+    print("\nCliente registrado con éxito.")
     mostrar_menu()
    
 def ver_clientes():
@@ -54,7 +54,7 @@ def buscar_cliente():
         print("\nCliente:")
         print("{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
         print("{:<15} {:<20} {:<30} {:<30}".format(cliente, datos["nombre"], datos["direccion"], datos["email"]))
-
+    mostrar_menu()
 
 
 
@@ -67,11 +67,12 @@ def realizar_compra():
         print("El ID de cliente no está registrado. Por favor, registre al cliente primero.")
         mostrar_menu()
         return
+    numero_pedido += 1
     print("\n--------Productos disponibles---------")
     for producto, datos in productos.items():
         print("{:<10} {:<20} {:<30}".format(producto, datos["nombre"], datos["precio"]))
     while True:
-        numero_pedido += 1
+       
         compra = input("Indique el numero del producto que desea comprar(si has terminado escribe 'fin'): ")
         if compra.lower() == 'fin':
             print(pedidos)
@@ -87,9 +88,39 @@ def realizar_compra():
         "Valor Total": sum(valorescompra),
         "Clienteid": idcliente,
         "fecha": dt.date().strftime("%Y-%m-%d")
-}                
-    print(pedidos)
-    mostrar_menu()      
+        }                
+    print(f"NºPedido: {numero_pedido}\nProductos: {productosencompra}\nFecha: {pedidos[numero_pedido]['fecha']}\nCliente: {idcliente}")
+    mostrar_menu()
+
+def seguimiento():
+    print("Seleccione una de las opciones de seguimiento:")
+    print("1 - Con Nº de pedido")
+    print("2 - Con ID de cliente")
+    eleccion = int(input("Por favor introduzca la opcion que desee: "))
+    if eleccion == 1:
+        Npedido = input("\n Introduzca el Nº de pedido: ")
+        if Npedido in pedidos:
+            print(f"\nNºpedido: {Npedido}\nProductos: {pedidos[Npedido]['producto']}\nFecha: {pedidos[numero_pedido]['fecha']}\n Cliente: {pedidos[numero_pedido]['Clienteid']} Valor Total: {pedidos[numero_pedido]['Valor Total']}€")
+        else:
+            print("\n Prodido no existente\n")
+            mostrar_menu()
+    elif eleccion == 2:
+        while True:
+            Clienteid = input("\n Por favor introduzca su ID de cliente: ")
+            if Clienteid not in clientes:
+                print("El cliente no existe")
+            else:
+                break
+        for Npedido, detalles in pedidos.items():
+            if detalles['Clienteid'] == Clienteid:
+                print(f"\nNº Pedido: {Npedido}\nProductos: {detalles['producto']}\nFecha: {detalles['fecha']}\nValor Total: {detalles['Valor Total']}€")
+                encontrado = True
+        if encontrado == False:
+            print("No se han encontrado pedidos de este cliente")
+    else: 
+        print("Por favor introduzca una opcion valida")
+        seguimiento()    
+      
 def mostrar_menu():
     print("\n--- Menú Principal ---")
     print("1. Registrar Cliente")
@@ -115,6 +146,4 @@ def mostrar_menu():
         case _:
             print("Error, indique una opcion valida")
             mostrar_menu()
-   
-   
 mostrar_menu()
