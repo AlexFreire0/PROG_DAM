@@ -17,7 +17,6 @@ pedidos = {}
 
 
 
-
 def registrar_cliente():
     id_cliente = input("Ingrese un ID único para el cliente: ")
     if id_cliente in clientes:
@@ -60,6 +59,8 @@ def buscar_cliente():
 
 
 def realizar_compra():
+    productosencompra = []
+    valorescompra = []
     idcliente = input("Por favor, introduzca su ID: ")
     global numero_pedido
     if idcliente not in clientes:
@@ -78,11 +79,14 @@ def realizar_compra():
         else:
             compra = int(compra)
             if compra in productos:
-                pedidos[numero_pedido] = {
-                    "producto": productos[compra]["nombre"],
-                    "precio": productos[compra]["precio"],
-                    "Clienteid": idcliente,
-                    "fecha": dt.date(),
+                productosencompra += [productos[compra]["nombre"]]
+                valorescompra += [productos[compra]["precio"]]
+    pedidos[numero_pedido] = {
+        "producto": productosencompra,
+        "precio": valorescompra,
+        "Valor Total": sum(valorescompra),
+        "Clienteid": idcliente,
+        "fecha": dt.date().strftime("%Y-%m-%d")
 }                
     print(pedidos)
     mostrar_menu()      
