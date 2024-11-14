@@ -98,7 +98,7 @@ def seguimiento():
     print("2 - Con ID de cliente")
     eleccion = int(input("Por favor introduzca la opcion que desee: "))
     if eleccion == 1:
-        Npedido = input("\n Introduzca el Nº de pedido: ")
+        Npedido = int(input("\n Introduzca el Nº de pedido: "))
         if Npedido in pedidos:
             print(f"\nNºpedido: {Npedido}\nProductos: {pedidos[Npedido]['producto']}\nFecha: {pedidos[numero_pedido]['fecha']}\n Cliente: {pedidos[numero_pedido]['Clienteid']} Valor Total: {pedidos[numero_pedido]['Valor Total']}€")
         else:
