@@ -105,12 +105,11 @@ def seguimiento():
             print("\n Prodido no existente\n")
             mostrar_menu()
     elif eleccion == 2:
-        while True:
-            Clienteid = input("\n Por favor introduzca su ID de cliente: ")
-            if Clienteid not in clientes:
-                print("El cliente no existe")
-            else:
-                break
+
+        Clienteid = input("\n Por favor introduzca su ID de cliente: ")
+        if Clienteid not in clientes:
+            print("\nEl cliente no existe")
+            return
         for Npedido, detalles in pedidos.items():
             if detalles['Clienteid'] == Clienteid:
                 print(f"\nNº Pedido: {Npedido}\nProductos: {detalles['producto']}\nFecha: {detalles['fecha']}\nValor Total: {detalles['Valor Total']}€")
