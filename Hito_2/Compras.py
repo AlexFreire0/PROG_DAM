@@ -1,19 +1,15 @@
 from datetime import date, time, datetime
 dt = datetime.now()
-clientes = {
-    "root": {
-        "nombre": "root",
-        "direccion": "",
-        "email": "",
-        "Admin": True,
-        "contraseña": "CampusFP"}}  
+contrasena_admin = "CampusFP2425"
+clientes = {    # Diccionario vacío para almacenar clientes
+}  
 productos = {
     1: {"nombre": "Patatas", "precio": 8.0},
     2: {"nombre": "Zanahorias", "precio": 6.0},
     3: {"nombre": "Agua", "precio": 1.0},
 }
-numero_pedido = 0
-pedidos = {}
+numero_pedido = 0 # Contador para los pedidos
+pedidos = {} # Diccionario para almacenar los pedidos
 
 
 
@@ -22,13 +18,12 @@ def registrar_cliente():
     if id_cliente in clientes:
         print("Este ID ya existe. Intente con otro.")
         return
-
-    admin = False
+    # pedimos toda la informacion
     nombre = input("Ingrese el nombre del cliente: ")
     direccion = input("Ingrese la dirección del cliente: ")
     email = input("Ingrese el email del cliente: ")
 
-
+    # Lo registramos al cliente en el diccionario
     clientes[id_cliente] = {
         "nombre": nombre,
         "direccion": direccion,
@@ -39,21 +34,25 @@ def registrar_cliente():
     mostrar_menu()
    
 def ver_clientes():
-    if not clientes :
-        print("No hay clientes registrados aún")
-    else:
-        print("{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
-        for id_cliente, datos in clientes.items():
-            print("{:<15} {:<20} {:<30} {:<30}".format(id_cliente, datos["nombre"], datos["direccion"], datos["email"]))
+    confirmacion = input("Introduzca la contraseña de admin para poder realizar esta acción: ")
+    if confirmacion == contrasena_admin:
+        if not clientes :
+            print("No hay clientes registrados aún")
+        else:
+            print("\n{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
+            for id_cliente, datos in clientes.items():
+                print("{:<15} {:<20} {:<30} {:<30}".format(id_cliente, datos["nombre"], datos["direccion"], datos["email"]))
     mostrar_menu()
    
 def buscar_cliente():
-    cliente = input("Por favor, introduzca el ID del cliente: ")
-    if cliente in clientes:
-        datos = clientes[cliente]
-        print("\nCliente:")
-        print("{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
-        print("{:<15} {:<20} {:<30} {:<30}".format(cliente, datos["nombre"], datos["direccion"], datos["email"]))
+    confirmacion = input("Introduzca la contraseña de admin para poder realizar esta acción: ")
+    if confirmacion == contrasena_admin:
+        cliente = input("Por favor, introduzca el ID del cliente: ")
+        if cliente in clientes:
+            datos = clientes[cliente]
+            print("\nCliente:")
+            print("{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
+            print("{:<15} {:<20} {:<30} {:<30}".format(cliente, datos["nombre"], datos["direccion"], datos["email"]))
     mostrar_menu()
 
 
@@ -100,7 +99,7 @@ def seguimiento():
     if eleccion == 1:
         Npedido = int(input("\n Introduzca el Nº de pedido: "))
         if Npedido in pedidos:
-            print(f"\nNºpedido: {Npedido}\nProductos: {pedidos[Npedido]['producto']}\nFecha: {pedidos[numero_pedido]['fecha']}\n Cliente: {pedidos[numero_pedido]['Clienteid']} Valor Total: {pedidos[numero_pedido]['Valor Total']}€")
+            print(f"\nNºpedido: {Npedido}\nProductos: {pedidos[Npedido]['producto']}\nFecha: {pedidos[Npedido]['fecha']}\n Cliente: {pedidos[Npedido]['Clienteid']} Valor Total: {pedidos[Npedido]['Valor Total']}€")
         else:
             print("\n Prodido no existente\n")
             mostrar_menu()
