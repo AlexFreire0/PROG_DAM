@@ -28,7 +28,6 @@ def registrar_cliente():
         "nombre": nombre,
         "direccion": direccion,
         "email": email,
-        "Admin": admin
     }
     print("\nCliente registrado con éxito.")
     mostrar_menu()
