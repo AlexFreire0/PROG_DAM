@@ -51,6 +51,7 @@ def buscar_cliente():
         if cliente in clientes:
             datos = clientes[cliente]
             print("\nCliente:")
+            #Mostramos los clientes con forma
             print("{:<15} {:<20} {:<30} {:<30}".format("ID Cliente", "Nombre", "Dirección", "Email"))
             print("{:<15} {:<20} {:<30} {:<30}".format(cliente, datos["nombre"], datos["direccion"], datos["email"]))
     mostrar_menu()
@@ -79,15 +80,18 @@ def realizar_compra():
         else:
             compra = int(compra)
             if compra in productos:
+                #Meteremos el valor de los productos y los productos en listas.
                 productosencompra += [productos[compra]["nombre"]]
                 valorescompra += [productos[compra]["precio"]]
+    #Tras haber metido en listas o haber recogido toda la información, meteremos esto en el diccionario de la compra con su respectivo nº de pedido.
     pedidos[numero_pedido] = {
         "producto": productosencompra,
         "precio": valorescompra,
         "Valor Total": sum(valorescompra),
         "Clienteid": idcliente,
         "fecha": dt.date().strftime("%Y-%m-%d")
-        }                
+        } 
+    #Tras realizar la compra mostraremos la compra realizada justo ahora.               
     print(f"NºPedido: {numero_pedido}\nProductos: {productosencompra}\nFecha: {pedidos[numero_pedido]['fecha']}\nCliente: {idcliente}")
     mostrar_menu()
     # En esta funcion seguiremos los pedidos de dos formas diferentes, 1 de estas es mediante el Nº del pedido y la otra mediante el ID cliente
