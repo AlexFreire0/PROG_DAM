@@ -32,7 +32,7 @@ def registrar_cliente():
     }
     print("\nCliente registrado con éxito.")
     mostrar_menu()
-   
+   #Hacemos la funcion en la que a partir de demostrar tener la contraseña del admin podamos ver a todos los clientes y su respectiva información.
 def ver_clientes():
     confirmacion = input("Introduzca la contraseña de admin para poder realizar esta acción: ")
     if confirmacion == contrasena_admin:
@@ -43,7 +43,7 @@ def ver_clientes():
             for id_cliente, datos in clientes.items():
                 print("{:<15} {:<20} {:<30} {:<30}".format(id_cliente, datos["nombre"], datos["direccion"], datos["email"]))
     mostrar_menu()
-   
+   # En esta funcion al igual q en ver clientes tendremos q introducir el codigo admin y el cliente del que deseemos ver la informacion
 def buscar_cliente():
     confirmacion = input("Introduzca la contraseña de admin para poder realizar esta acción: ")
     if confirmacion == contrasena_admin:
@@ -56,7 +56,7 @@ def buscar_cliente():
     mostrar_menu()
 
 
-
+    # Para realizar la compra necesitaremos meter toda la informacion en el diccionario global de pedidos y despues ligarlo de alguna manera con el cliente como se ha hecho aqui.
 def realizar_compra():
     productosencompra = []
     valorescompra = []
@@ -90,7 +90,7 @@ def realizar_compra():
         }                
     print(f"NºPedido: {numero_pedido}\nProductos: {productosencompra}\nFecha: {pedidos[numero_pedido]['fecha']}\nCliente: {idcliente}")
     mostrar_menu()
-
+    # En esta funcion seguiremos los pedidos de dos formas diferentes, 1 de estas es mediante el Nº del pedido y la otra mediante el ID cliente
 def seguimiento():
     print("Seleccione una de las opciones de seguimiento:")
     print("1 - Con Nº de pedido")
@@ -99,6 +99,7 @@ def seguimiento():
     if eleccion == 1:
         Npedido = int(input("\n Introduzca el Nº de pedido: "))
         if Npedido in pedidos:
+            #Imprimimos el pedido de manera que el usuario pueda entender de manera adecuada el contenido.
             print(f"\nNºpedido: {Npedido}\nProductos: {pedidos[Npedido]['producto']}\nFecha: {pedidos[Npedido]['fecha']}\n Cliente: {pedidos[Npedido]['Clienteid']} Valor Total: {pedidos[Npedido]['Valor Total']}€")
         else:
             print("\n Prodido no existente\n")
@@ -118,7 +119,7 @@ def seguimiento():
     else: 
         print("Por favor introduzca una opcion valida")
         seguimiento()    
-      
+      # Esta es la funcion principal desde la cual podremos acceder a cualquiera de las funciones siendo un menu interactivo para el usuario.
 def mostrar_menu():
     print("\n--- Menú Principal ---")
     print("1. Registrar Cliente")
@@ -144,4 +145,5 @@ def mostrar_menu():
         case _:
             print("Error, indique una opcion valida")
             mostrar_menu()
+# Llamamos a la funcion principal del menú
 mostrar_menu()
